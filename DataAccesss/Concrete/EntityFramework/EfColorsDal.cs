@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DataAccesss.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfColorsDal : IEntityRepository<Colors>
     {
-        public void Add(Car entity)
+        public void Add(Colors entity)
         {
             using (RentACarContext rentContext = new())
             {
@@ -23,7 +23,7 @@ namespace DataAccesss.Concrete.EntityFramework
             }
         }
 
-        public void Delete(Car entity)
+        public void Delete(Colors entity)
         {
             using (RentACarContext rentContext = new())
             {
@@ -33,26 +33,26 @@ namespace DataAccesss.Concrete.EntityFramework
             }
         }
 
-        public Car Get(Expression<Func<Car, bool>> filter)
+        public Colors Get(Expression<Func<Colors, bool>> filter)
         {
             using (RentACarContext rentContext = new())
             {
-                return rentContext.Set<Car>().SingleOrDefault(filter);
-                    
+                return rentContext.Set<Colors>().SingleOrDefault(filter);
+
             }
         }
 
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        public List<Colors> GetAll(Expression<Func<Colors, bool>> filter = null)
         {
             using (RentACarContext rentContext = new())
             {
                 return filter == null
-                    ? rentContext.Set<Car>().ToList()
-                    : rentContext.Set<Car>().Where(filter).ToList();
+                    ? rentContext.Set<Colors>().ToList()
+                    : rentContext.Set<Colors>().Where(filter).ToList();
             }
         }
 
-        public void Update(Car entity)
+        public void Update(Colors entity)
         {
             using (RentACarContext rentContext = new())
             {

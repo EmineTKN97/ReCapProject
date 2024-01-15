@@ -1,5 +1,4 @@
 ﻿using DataAccesss.Abstract;
-using Entities.Abstract;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DataAccesss.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfBrandDal : IEntityRepository<Brand>
     {
-        public void Add(Car entity)
+        public void Add(Brand entity)
         {
             using (RentACarContext rentContext = new())
             {
@@ -21,9 +20,10 @@ namespace DataAccesss.Concrete.EntityFramework
                 AddEntity.State = EntityState.Added;
                 rentContext.SaveChanges();
             }
+
         }
 
-        public void Delete(Car entity)
+        public void Delete(Brand entity)
         {
             using (RentACarContext rentContext = new())
             {
@@ -33,33 +33,34 @@ namespace DataAccesss.Concrete.EntityFramework
             }
         }
 
-        public Car Get(Expression<Func<Car, bool>> filter)
+        public Brand Get(Expression<Func<Brand, bool>> filter)
         {
             using (RentACarContext rentContext = new())
             {
-                return rentContext.Set<Car>().SingleOrDefault(filter);
-                    
+                return rentContext.Set<Brand>().SingleOrDefault(filter);
+
             }
         }
 
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (RentACarContext rentContext = new())
+            public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
             {
-                return filter == null
-                    ? rentContext.Set<Car>().ToList()
-                    : rentContext.Set<Car>().Where(filter).ToList();
+                using (RentACarContext rentContext = new())
+                {
+                    return filter == null
+                        ? rentContext.Set<Brand>().ToList()
+                        : rentContext.Set<Brand>().Where(filter).ToList();
+                }
             }
-        }
 
-        public void Update(Car entity)
-        {
-            using (RentACarContext rentContext = new())
+            public void Update(Brand entity)
             {
-                var UpdateEntity = rentContext.Entry(entity);
-                UpdateEntity.State = EntityState.Modified;
-                rentContext.SaveChanges();
+                using (RentACarContext rentContext = new())
+                {
+                    var UpdateEntity = rentContext.Entry(entity);
+                    UpdateEntity.State = EntityState.Modified;
+                    rentContext.SaveChanges();
+                }
             }
-        }
     }
-}
+ }
+   
