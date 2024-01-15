@@ -15,11 +15,11 @@ namespace DataAccesss.Concrete.EntityFramework
     {
         public void Add(Car entity)
         {
-            using (RentACarContext rentContext = new())
+            using (RentACarContext context = new RentACarContext())
             {
-                var AddEntity = rentContext.Entry(entity);
-                AddEntity.State = EntityState.Added;
-                rentContext.SaveChanges();
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
             }
         }
 

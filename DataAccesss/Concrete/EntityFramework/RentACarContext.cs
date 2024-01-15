@@ -14,11 +14,11 @@ namespace DataAccesss.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=EMINE;Initial Catalog=RentAcar;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=EMINE;Initial Catalog=RentDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Brand> brands { get; set; }
+        public DbSet<Brand> Brands { get; set; }
 
         public DbSet<Colors> colors { get; set; }
 
