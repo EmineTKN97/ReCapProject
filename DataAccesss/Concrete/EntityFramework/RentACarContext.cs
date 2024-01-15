@@ -17,10 +17,16 @@ namespace DataAccesss.Concrete.EntityFramework
             optionsBuilder.UseSqlServer(@"Data Source=EMINE;Initial Catalog=RentDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
-        public DbSet<Car> Cars { get; set; }
-        public DbSet<Brand> Brands { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Colors>().HasNoKey();
+        }
+        //Dbset<benim projedeki nesnem>Veritabanındaki nesneme karşılık tablo { get; set; }
+        public DbSet<Car> Car { get; set; }
+        public DbSet<Brand> Brand { get; set; }
 
-        public DbSet<Colors> colors { get; set; }
+        public DbSet<Colors> Colors { get; set; }
 
 
     }
