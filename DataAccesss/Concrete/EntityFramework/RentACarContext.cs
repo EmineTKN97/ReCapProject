@@ -20,11 +20,13 @@ namespace DataAccesss.Concrete.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Colors>().HasNoKey();
+            modelBuilder.Entity<Colors>().HasKey(c => c.ColorId);
+            modelBuilder.Entity<Brand>().HasKey(b => b.BrandId);
+            modelBuilder.Entity<Car>().HasKey(c => c.Id);
         }
         //Dbset<benim projedeki nesnem>Veritabanındaki nesneme karşılık tablo { get; set; }
-        public DbSet<Car> Car { get; set; }
-        public DbSet<Brand> Brand { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Brand> Brands { get; set; }
 
         public DbSet<Colors> Colors { get; set; }
 
