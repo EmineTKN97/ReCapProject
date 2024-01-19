@@ -8,6 +8,7 @@ namespace Business.Constants
 {
 public static class Messages
     {
+        
             public static string CarAdded = "Araba başarı ile eklendi";
             public static string CarNameİnvalid = "Araba isimi 2 karakterden uzun olmalıdır.";
             public static string CarListed = "Arabalar listelendi.";
@@ -23,5 +24,20 @@ public static class Messages
             public static string CarDeleted="Araba silindi";
             public static string ColorUpdate="Renk güncellendi";
             public static string DeleteColor="Renk Silindi";
+            public static string CompanyNameİnvalid ="Şirket isimi 2 karakterden küçük olmaz";
+            public static string CustomerAdded="Müşteri başarıyla eklendi";
+            public static string DeleteCustomer="Müşteri başarıyla silindi";
+            public static string ListedCustomer="Müşteriler Listelendi";
+            public static string CustomerUpdated="Müşteriler güncellendi";
+            public static string Userİnvalid="Kullanıcı adı 2 karakterden uzun olmalıdır";
+            public static string UserAdded="Kullanıcı eklendi";
+            public static string DeleteUser="Kullanıcı silindi";
+            public static string listedUsers="Kullanıcı listelendi";
+            public static string UpdatedUser="Müşteri güncellendi";
+            public static string RentalInvalid= "Arabanın kiralanabilmesi için arabanın teslim edilmesi gerekmektedir.";
+            public static string RentalAdded="Araba kiralama başarılı";
+            public static string DeleteRental="Araba kiralama işlemi silindi";
+            public static string UpdatedRental="Kiralama işlemi günvellendi";
+            public static string listedRental="Kiralamalar listelendi";
     }
 }

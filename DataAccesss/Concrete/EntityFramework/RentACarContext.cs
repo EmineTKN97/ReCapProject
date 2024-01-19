@@ -23,6 +23,9 @@ namespace DataAccesss.Concrete.EntityFramework
             modelBuilder.Entity<Colors>().HasKey(c => c.ColorId);
             modelBuilder.Entity<Brand>().HasKey(b => b.BrandId);
             modelBuilder.Entity<Car>().HasKey(c => c.Id);
+            modelBuilder.Entity<Rental>().HasKey(r => r.Id);
+            modelBuilder.Entity<Customer>().HasKey(cm => cm.Id);
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
         }
         //Dbset<benim projedeki nesnem>Veritabanındaki nesneme karşılık tablo { get; set; }
         public DbSet<Car> Cars { get; set; }
@@ -30,6 +33,11 @@ namespace DataAccesss.Concrete.EntityFramework
 
         public DbSet<Colors> Colors { get; set; }
 
+        public DbSet<Rental> Rentals { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+         public DbSet<Customer> Customers { get; set; }    
 
     }
 }
