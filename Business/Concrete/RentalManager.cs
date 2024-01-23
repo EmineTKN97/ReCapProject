@@ -35,9 +35,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalAdded);
         }
 
-        public IResult DeleteRental(Rental rental)
+
+        public IResult DeleteRental(int id)
         {
-            _rentaldal.Delete(rental);
+            _rentaldal.Delete(id);
             return new Result(true, Messages.DeleteRental);
         }
 
@@ -48,7 +49,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentaldal.Get(u => u.Id == id));
+            return new SuccessDataResult<Rental>(_rentaldal.Get(r=> r.Id == id));
         }
 
         public IResult UpdateRental(Rental rental)

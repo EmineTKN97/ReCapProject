@@ -57,9 +57,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("DeleteUser")]
-        public IActionResult DeleteUser(User user)
+        public IActionResult DeleteUser(int id)
         {
-            var result = _userService.DeleteUser(user);
+            var result = _userService.DeleteUser(id);
             if (result.Success)
             {
                 return Ok(result.Message);

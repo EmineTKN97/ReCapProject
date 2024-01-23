@@ -14,6 +14,6 @@ public  interface IUserService
         IDataResult<List<User>> GetAll();
         IResult AddUser(User user);
         IResult UpdateUser(User user);
-        IResult DeleteUser(User user);
+        IResult DeleteUser(int id);
     }
 }

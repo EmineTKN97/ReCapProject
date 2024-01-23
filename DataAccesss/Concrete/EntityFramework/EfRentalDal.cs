@@ -19,6 +19,17 @@ namespace DataAccesss.Concrete.EntityFramework
         {
             _context = context;
         }
+        public void Delete(int id)
+        {
+            var RentalToDelete = _context.Rentals.FirstOrDefault(r => r.Id == id);
+
+            if (RentalToDelete != null)
+            {
+                _context.Rentals.Remove(RentalToDelete);
+                _context.SaveChanges();
+            }
+
+        }
     }
         
 }

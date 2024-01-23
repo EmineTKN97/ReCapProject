@@ -10,5 +10,6 @@ namespace DataAccesss.Abstract
 {
     public interface IRentalDal : IEntityRepository<Rental>
     {
+        void Delete(int id);
     }
 }

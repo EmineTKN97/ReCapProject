@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccesss.Abstract
 {
-  public interface ICustomerDal:IEntityRepository<Customer>
+    public interface ICustomerDal : IEntityRepository<Customer>
     {
+        void Delete(int id);
     }
 }

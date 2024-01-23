@@ -57,9 +57,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("DeleteCustomer")]
-        public IActionResult DeleteCustomer(Customer customer)
+        public IActionResult DeleteCustomer(int id)
         {
-            var result = _customerService.DeleteCustomer(customer);
+            var result = _customerService.DeleteCustomer(id);
             if (result.Success)
             {
                 return Ok(result.Message);

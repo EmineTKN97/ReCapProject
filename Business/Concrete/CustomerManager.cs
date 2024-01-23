@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Castle.Core.Resource;
 using Core.Utilities.Results;
 using DataAccesss.Abstract;
 using DataAccesss.Concrete.EntityFramework;
@@ -32,10 +33,10 @@ namespace Business.Concrete
             return new Result(true, Messages.CustomerAdded);
         }
 
-        public IResult DeleteCustomer(Customer customer)
+        
+        public IResult DeleteCustomer(int id)
         {
-
-            _customerDal.Delete(customer);
+            _customerDal.Delete(id);
             return new Result(true, Messages.DeleteCustomer);
         }
 
