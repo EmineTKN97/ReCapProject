@@ -39,5 +39,6 @@ public static class Messages
             public static string DeleteRental="Araba kiralama işlemi silindi";
             public static string UpdatedRental="Kiralama işlemi günvellendi";
             public static string listedRental="Kiralamalar listelendi";
+            public  static string CarImageNotAdded="Sadece 5 adet resim eklenebilir";
     }
 }

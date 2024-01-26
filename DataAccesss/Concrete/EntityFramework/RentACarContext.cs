@@ -26,6 +26,7 @@ namespace DataAccesss.Concrete.EntityFramework
             modelBuilder.Entity<Rental>().HasKey(r => r.Id);
             modelBuilder.Entity<Customer>().HasKey(cm => cm.Id);
             modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<CarImage>().HasKey(cı=> cı.Id);
         }
         //Dbset<benim projedeki nesnem>Veritabanındaki nesneme karşılık tablo { get; set; }
         public DbSet<Car> Cars { get; set; }
@@ -37,7 +38,8 @@ namespace DataAccesss.Concrete.EntityFramework
 
         public DbSet<User> Users { get; set; }
 
-         public DbSet<Customer> Customers { get; set; }    
+         public DbSet<Customer> Customers { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
 
     }
 }
