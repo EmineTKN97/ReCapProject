@@ -27,53 +27,32 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        public async Task<string> AddCarImage(CarİmageDTO imageDto)
-        {
-            //IResult result = BusinessRules.Run(CheckCarImageCountofCarCorrect(id));
+        public async Task<string> AddCarImage(IFormFile _IFormFile,int id)
+        {      
+            var result = _carImageDal.GetAll(c => c.CarId == id).Count();
+            if (result > 5)
             {
-
-                string FileName = "";
-                try
-                {
-                    FileInfo _FileInfo = new FileInfo(imageDto.İmagePath.FileName);
-                    FileName = Guid.NewGuid().ToString();
-                    var _GetFilePath = Common.GetFilePath(imageDto.İmagePath.FileName);
-
-                    // Resmi bilgisayara kaydet
-                    using (var _FileStream = new FileStream(_GetFilePath, FileMode.Create))
-                    {
-                        await imageDto.İmagePath.CopyToAsync(_FileStream);
-                    }
-
-                    // Veritabanına dosya yolunu ve diğer bilgileri kaydet
-                    Add(FileName, imageDto.CarId);
-
-                    return FileName;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                return "ekleme yapamazsınız";
             }
-        }
-        public void Add(string image,int CarId)
-        {
-            using (var context = new RentACarContext())
+            else
             {
-                var imageEntity = new CarImage
+                string uniqueFileName = Guid.NewGuid().ToString();
+                string fileExtension = Path.GetExtension(_IFormFile.FileName);
+                string fileName = uniqueFileName + fileExtension;
+
+                var filePath = Common.GetFilePath(fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    CarId = CarId,
-                    ImagePath = image,
-                    Date = DateTime.Now,
-                };
+                    await _IFormFile.CopyToAsync(fileStream);
+                }
 
-                context.CarImages.Add(imageEntity);
-                context.SaveChanges();
+                _carImageDal.AddImage(fileName, id);
+
+                return fileName;
             }
-
+           
         }
-
-
         public IResult DeleteCarImage(int ImageId)
         {
             throw new NotImplementedException();
@@ -93,18 +72,7 @@ namespace Business.Concrete
         {
             throw new NotImplementedException();
         }
-       /* private IResult CheckCarImageCountofCarCorrect(int CarId)
-        {
-            var result = _carImageDal.GetAll(cı => cı.CarId == CarId).Count();
-            if (result > 5)
-            {
-                return new ErrorResult(Messages.CarImageNotAdded);
+     
 
-            }
-            return new SuccessResult();
-        
-        }
-       */
-        
     }
 }

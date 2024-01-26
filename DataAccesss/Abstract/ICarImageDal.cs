@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccesss.Abstract
 {
-public interface ICarImageDal : IEntityRepository<CarImage>
+    public interface ICarImageDal : IEntityRepository<CarImage>
     {
+        void AddImage(string fileName, int id);
+        
     }
 }

@@ -41,16 +41,7 @@ namespace Business.Concrete
             return new Result(true, Messages.CarDeleted);
         }
 
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (RentACarContext Context = new())
-            {
-                return filter == null
-                    ? Context.Set<Car>().ToList()
-                    : Context.Set<Car>().Where(filter).ToList();
-
-            }
-        }
+   
 
         public IDataResult<List<Car>> GetAll()
         {

@@ -8,8 +8,8 @@ namespace Business.Constants
 {
 public static class Messages
     {
-        
-            public static string CarAdded = "Araba başarı ile eklendi";
+        internal static readonly string CarImageUpdate;
+        public static string CarAdded = "Araba başarı ile eklendi";
             public static string CarNameİnvalid = "Araba isimi 2 karakterden uzun olmalıdır.";
             public static string CarListed = "Arabalar listelendi.";
             public  static string ColorNameİnvalid ="Renk isimi 2 karakterden uzun olmalıdır.";
@@ -40,5 +40,9 @@ public static class Messages
             public static string UpdatedRental="Kiralama işlemi günvellendi";
             public static string listedRental="Kiralamalar listelendi";
             public  static string CarImageNotAdded="Sadece 5 adet resim eklenebilir";
+        public static string CarImageDeleted="resim silindi";
+        public static string CarImageListed="resimler listelendi";
+       public static string CarImageAdded="resim eklendi";
+       public static string CarImageCountExceeded="resim sayısı fazla";
     }
 }
