@@ -52,7 +52,7 @@ namespace DataAccesss.Concrete.EntityFramework
 
             }
         }
-            void ICarImageDal.AddImage(string fileName, int id){ 
+        void ICarImageDal.AddImage(string fileName, int id){ 
             
 
             using (var dbContext = new RentACarContext())
@@ -69,5 +69,20 @@ namespace DataAccesss.Concrete.EntityFramework
                 dbContext.SaveChanges();
             }
         }
-    } 
+        public void AddDefaultImage(int carId)
+        {
+            using (var dbContext = new RentACarContext())
+            {
+                CarImage defaultImage = new CarImage
+            {
+                CarId = carId,
+                Date = DateTime.Now,
+                ImagePath = "default.jpg"
+            };
+
+            dbContext.CarImages.Add(defaultImage);
+            dbContext.SaveChanges();
+        }
+    }
+} 
 }

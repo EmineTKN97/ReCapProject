@@ -9,6 +9,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +30,10 @@ namespace Business.Concrete
 
         public async Task<IResult> AddCarImage(IFormFile _IFormFile, int id)
         {
-            var sonuc = _carImageDal.GetAll(c => c.CarId == id).Count();
-            if (sonuc > 4)
+            IResult result = BusinessRules.Run(CheckIfImageLimit(id), GetDefaultImage(id));
+            if (result != null)
             {
-                return new ErrorResult(Messages.NotCarImage);
+                return result;
             }
             else
             {
@@ -65,16 +66,21 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
-       
+
 
         public IDataResult<List<CarImage>> GetById(int CarId)
         {
 
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == CarId));
+            var imageCheckResult = BusinessRules.Run(CheckImage(CarId));
+
+            if (imageCheckResult != null)
+            {
+                _carImageDal.AddDefaultImage(CarId);
+                return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == CarId));
+            }
+            return new ErrorDataResult<List<CarImage>>();
+
         }
-
-
-
         public async Task<IResult> UpdateCarImage(IFormFile file, int ıd)
         {
             string uniqueFileName = Guid.NewGuid().ToString();
@@ -94,10 +100,46 @@ namespace Business.Concrete
 
         }
 
+        private IResult CheckIfImageLimit(int carId)
+        {
+            var result = _carImageDal.GetAll(cı => cı.CarId == carId).Count();
+
+            if (result >= 5)
+            {
+                return new ErrorResult(Messages.NotCarImage);
+            }
+            return new SuccessResult();
+        }
+
+        private IDataResult<CarImage> GetDefaultImage(int CarId)
+        {
+            CarImage defaultImage = new CarImage { CarId = CarId, Date = DateTime.Now, ImagePath = "default.jpg" };
+            if (defaultImage != null)
+            {
+                _carImageDal.AddDefaultImage(CarId);
+                return new SuccessDataResult<CarImage>(defaultImage);
+            }
+            else
+            {
+                return new ErrorDataResult<CarImage>("Varsayılan resim bulunamadı.");
+            }
+
+        }
+        private IResult CheckImage(int carId)
+        {
+            var result = _carImageDal.GetAll(cı => cı.CarId == carId).Count();
+            if (result > 0)
+            {
+                return new SuccessResult();
+            }
+            return new ErrorResult(Messages.ImageNotError);
+
+        }
+
 
     }
 
-       
+
 }
 
 

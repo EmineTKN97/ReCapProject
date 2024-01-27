@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,5 +44,7 @@ namespace Business.Constants
         public static string UpdateCarImage = "Resim Güncellendi";
         public static string NotCarImage = "Bir araba için en fazla 5 resim eklenebilir";
         public static string AddCarİmage = "resim başarı ile eklendi";
+        internal static string ImageNotError;
+        internal static CarImage AddDefaultCarImage;
     }
 }

@@ -14,5 +14,6 @@ namespace DataAccesss.Abstract
         void AddImage(string fileName, int id);
         void Delete(int ımageId);
         void Update(string fileName, int ıd);
+        public void AddDefaultImage(int carId);
     }
 }
