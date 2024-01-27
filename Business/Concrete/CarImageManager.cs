@@ -27,12 +27,12 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        public async Task<string> AddCarImage(IFormFile _IFormFile,int id)
-        {      
-            var result = _carImageDal.GetAll(c => c.CarId == id).Count();
-            if (result > 5)
+        public async Task<IResult> AddCarImage(IFormFile _IFormFile, int id)
+        {
+            var sonuc = _carImageDal.GetAll(c => c.CarId == id).Count();
+            if (sonuc > 4)
             {
-                return "ekleme yapamazsınız";
+                return new ErrorResult(Messages.NotCarImage);
             }
             else
             {
@@ -49,30 +49,58 @@ namespace Business.Concrete
 
                 _carImageDal.AddImage(fileName, id);
 
-                return fileName;
+                return new SuccessResult(Messages.AddCarİmage);
+
             }
-           
+
         }
         public IResult DeleteCarImage(int ImageId)
         {
-            throw new NotImplementedException();
+            _carImageDal.Delete(ImageId);
+            return new Result(true, Messages.DeleteCarImage);
         }
 
         public IDataResult<List<CarImage>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
-        public IDataResult<CarImage> GetById(int CarId)
+       
+
+        public IDataResult<List<CarImage>> GetById(int CarId)
         {
-            throw new NotImplementedException();
+
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == CarId));
         }
 
-        public IResult UpdateCarImage(CarImage carImage)
+
+
+        public async Task<IResult> UpdateCarImage(IFormFile file, int ıd)
         {
-            throw new NotImplementedException();
+            string uniqueFileName = Guid.NewGuid().ToString();
+            string fileExtension = Path.GetExtension(file.FileName);
+            string fileName = uniqueFileName + fileExtension;
+
+            var filePath = Common.GetFilePath(fileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            _carImageDal.Update(fileName, ıd);
+
+            return new SuccessResult(Messages.UpdateCarImage);
+
         }
-     
+
 
     }
+
+       
 }
+
+
+
+
+

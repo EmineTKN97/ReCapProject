@@ -21,14 +21,58 @@ namespace WebAPI.Controllers
         {
             var result = await _carImageService.AddCarImage(file, carId);
 
-            if (result == "Success") // Bu kısmı gerçek sonucunuzun yapısına göre ayarlayın
+            if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Message);
             }
 
+            return BadRequest(result.Message);
+        }
+        [HttpGet("GetCarImageById")]
+        public IActionResult GetById(int id)
+        {
+            var result = _carImageService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
             return BadRequest(result);
         }
+
+        [HttpGet("GetAllCarImage")]
+        public IActionResult GetAll()
+        {
+            var result = _carImageService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result);
+        }
+        [HttpDelete("DeleteCarImage")]
+        public IActionResult DeleteCarImage(int İmageId)
+        {
+            var result = _carImageService.DeleteCarImage(İmageId);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result);
+        }
+        [HttpPut("UpdateCarImage")]
+        public async Task<IActionResult> UpdateCarImage(int ıd, IFormFile file)
+        {
+            var result = await _carImageService.UpdateCarImage(file, ıd);
+            if (result.Success)
+            {
+            return Ok(result.Message);
+
+            }
+            return BadRequest(result.Message);
+
+        }
+
     }
 
- }
+}
 
