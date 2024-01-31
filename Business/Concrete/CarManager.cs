@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using ValidationException = FluentValidation.ValidationException;
+using Business.BusinessAspect.Autofac;
 
 namespace Business.Concrete
 {
@@ -28,7 +29,8 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        [ValidationAspect(typeof(CarValidator))]
+       // [ValidationAspect(typeof(CarValidator))]
+        [SecuredOperation("user,admin")]
         public IResult AddCar(Car car)
         {
             _carDal.Add(car);

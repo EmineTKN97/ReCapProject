@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Entities.Concrete;
 using DataAccesss.Abstract;
 using Entities.Concrete;
 using System;
@@ -9,24 +10,20 @@ using System.Threading.Tasks;
 
 namespace DataAccesss.Concrete.EntityFramework
 {
-public class EfUserDal:EfEntityRepısitoryBase<User, RentACarContext>, IUserDal
+    public class EfUserDal : EfEntityRepısitoryBase<User, RentACarContext>, IUserDal
     {
-        private readonly RentACarContext _context;
-
-        public EfUserDal(RentACarContext context)
+        public List<OperationClaim> GetClaims(User user)
         {
-            _context = context;
-        }
-        public void Delete(int id)
-        {
-            var UserToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
-
-            if (UserToDelete != null)
+            using (var context = new RentACarContext())
             {
-                _context.Users.Remove(UserToDelete);
-                _context.SaveChanges();
-            }
+                var result = from operationClaim in context.OperationClaims
+                             join userOperationClaim in context.UserOperationClaims
+                                 on operationClaim.Id equals userOperationClaim.OperationClaimsId
+                             where userOperationClaim.UserId == user.Id
+                             select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
+                return result.ToList();
 
+            }
         }
     }
 }

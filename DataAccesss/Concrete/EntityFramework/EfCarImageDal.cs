@@ -25,7 +25,6 @@ namespace DataAccesss.Concrete.EntityFramework
             }
         }
 
-      
         public void Update(string fileName, int ıd)
         {
             using (var context = new RentACarContext())

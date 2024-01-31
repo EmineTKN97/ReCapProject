@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string CarImageUpdate="resim güncellenmiştir";
+        public static string CarImageUpdate = "resim güncellenmiştir";
         public static string CarAdded = "Araba başarı ile eklendi";
         public static string CarNameİnvalid = "Araba isimi 2 karakterden uzun olmalıdır.";
         public static string CarListed = "Arabalar listelendi.";
@@ -44,7 +45,14 @@ namespace Business.Constants
         public static string UpdateCarImage = "Resim Güncellendi";
         public static string NotCarImage = "Bir araba için en fazla 5 resim eklenebilir";
         public static string AddCarİmage = "resim başarı ile eklendi";
-        internal static string ImageNotError;
-        internal static CarImage AddDefaultCarImage;
+        public static string ImageNotError = "Resim bulunamamdı";
+        public static string AddDefaultCarImage = "Default resim eklendi";
+        public static string AuthorizationDenied = "Yetkiniz yok";
+        public static string UserRegistered = "Kayıt oldu";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre  hatalı";
+        public static string SuccessfulLogin = "Giriş başarılı";
+        public static string UserAlreadyExists = "Kullanıcı mevcut";
+        public static string AccessTokenCreated = "Token oluşturuldu";
     }
 }
